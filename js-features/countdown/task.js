@@ -3,12 +3,18 @@ let delay = 1000;
 let updateClock = function () {
     let time = document.getElementById("timer");
     if (time.textContent === "00:00:00") {
+        stopTimer();
         cross_download("https://www.yourfreedom.ru/custom-content/uploads/0563266e58d8b270300cb92e7479558f.jpg", "Win.jpg");
         document.getElementById("status").textContent = "You are the winner!";
     }
     time.textContent = countDown(time.textContent);
 }
-setInterval(updateClock, delay);
+const timer = setInterval(updateClock, delay);
+
+function stopTimer() {
+    clearInterval(timer);
+    time = null;
+}
 
 function countDown(str) {
     let hours = parseInt(str.split(":")[0]);
