@@ -10,7 +10,6 @@ dots.item(0).classList.add("slider__dot_active"); //its our default first image
 nextImg.addEventListener("click", stepForward);
 prevImg.addEventListener("click", stepBackward);
 
-
 function stepForward() {
     for (let i = 0; i <= imgNumber; i++) {
 
