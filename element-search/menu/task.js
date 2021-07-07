@@ -4,9 +4,14 @@ for (let item of menu) {
     let openableMenu = item.parentElement.querySelector(".menu__link");
 
     openableMenu.addEventListener("click", function (event) {
-        closeAllMenus();
         event.preventDefault();
-        item.classList.add("menu_active");
+
+        if (item.classList.contains("menu_active")) {
+            item.classList.remove("menu_active");
+        } else {
+            closeAllMenus();
+            item.classList.add("menu_active");
+        }
     });
 }
 
