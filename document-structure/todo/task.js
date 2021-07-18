@@ -4,9 +4,10 @@ let taskList = document.getElementById("tasks__list");
 
 addButton.addEventListener("click", function (event) {
     event.preventDefault();
-    remove(
-        add(userInput.value)
-    );
+    if (userInput.value != "") {
+        remove(add(userInput.value));
+        userInput.value = "";
+    }
 });
 
 
@@ -31,6 +32,6 @@ function add(txt) {
 function remove(el) {
     el.addEventListener("click", function (event) {
         event.preventDefault();
-        btn.parentElement.remove();
+        el.remove();
     });
 }
