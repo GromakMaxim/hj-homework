@@ -15,7 +15,7 @@ for (let btn of controlButtons) {
     decrease.addEventListener("click", function (event) {
         event.preventDefault();
         let quantity = btn.getElementsByClassName("product__quantity-value").item(0);
-        if (quantity.textContent > 0) quantity.textContent = parseInt(quantity.textContent, 10) - 1;
+        if (quantity.textContent > 1) quantity.textContent = parseInt(quantity.textContent, 10) - 1;
     })
 }
 
@@ -44,25 +44,12 @@ function addToCart(btn) {
     cartProduct.appendChild(img);
     cartProduct.appendChild(quantity);
 
-
-    if (!checkIfExists(id) ) {
-        cartProducts.insertAdjacentElement("afterbegin", cartProduct);
+    let itemFound = Array.from(cartProducts.children).find(item => item.getAttribute("data-id") == id);
+    
+    if (itemFound != undefined) {
+        let itemFromCart = itemFound.getElementsByClassName("cart__product-count").item(0);
+        itemFromCart.textContent = parseInt(itemFromCart.textContent.trim(), 10) + parseInt(quantity.textContent, 10);
     } else {
-        let itemFromCart = getItemFromCartById(id).getElementsByClassName("cart__product-count").item(0);
-        itemFromCart.textContent = parseInt(itemFromCart.textContent.trim(), 10) + parseInt(quantity.textContent,10);
+        cartProducts.insertAdjacentElement("afterbegin", cartProduct);
     }
-}
-
-function checkIfExists(id) {
-    for (let item of cartProducts.children) {
-        if (item.getAttribute("data-id") === id) return true;
-    }
-    return false;
-}
-
-function getItemFromCartById(id) {
-    for (let item of cartProducts.children) {
-        if (item.getAttribute("data-id") === id) return item;
-    }
-    return null;
 }
